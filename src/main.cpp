@@ -213,7 +213,13 @@ int main( int argc, char* argv[] )
 		
 			// NP-ECM interactions
 	//		NP_ECM_binding_model( diffusion_dt ); 
-	
+			
+	                // updata the Ei source !!!
+			add_Ei_source ( diffusion_dt );
+			
+			// updata pH based on H+ concdentration !!!
+			update_pH( diffusion_dt );  
+			
 			// NP transformations 
 			NP_transformations( diffusion_dt );
 			

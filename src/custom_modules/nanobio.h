@@ -205,6 +205,9 @@ class Pharmacodynamics
 	void read_from_pugixml( pugi::xml_node parent_node ); // done 
 
 	// where do I find the corresponding drug in the cell's custom data? 
+	
+	int cell_Ei = 6.6e-8;  // adding a custom data of Ei source for making pH stable
+	
 	int cell_NP_i = 0;
 	int cell_NP_AUC_i = 0; 
 	int cell_response_i = 0;
@@ -310,5 +313,9 @@ void chemotaxis_function( Cell* pCell , Phenotype& phenotype , double dt ); // d
 void apply_therapies( void ); 
 
 void NP_transformations( double dt );
+
+void add_Ei_source( double dt ); // adding Ei source function !!!!
+
+void update_pH( double dt ); // adding update_pH function !!!
 
 #endif

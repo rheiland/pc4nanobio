@@ -200,6 +200,9 @@ void Nanobio_Parameters::read_from_pugixml(void)
 	node = node.parent(); 
 	
 	// add proper custom variables to cell default for this NP1
+	
+        // adding Ei source
+	NP_preform_PD.cell_Ei = cell_defaults.custom_data.add_variable( "Ei" , "uM*um^3/min/cell" , 6.6e-8);  // 0.0363 , 1320, 1.8e-05, 4e-10
 	NP_preform_PD.cell_NP_i = cell_defaults.custom_data.add_variable( "NP1" , "dimensionless" , 0.0 );
 	NP_preform_PD.cell_NP_AUC_i = cell_defaults.custom_data.add_variable( "NP1_AUC" , "dimensionless" , 0.0 );
 	NP_preform_PD.cell_response_i = cell_defaults.custom_data.add_variable( "NP1 response" , "dimensionless" , 0.0 );
@@ -1356,7 +1359,8 @@ double NP_transformation::get_transition_rate( int voxel_index )
 	double output = 0.0; 
 	double condition = microenvironment(voxel_index)[ NP_condition_substrate_index ]; 
 	double param = condition;
-	param -= condition_2; 
+	param -= condition_1; // should be condition_1
+	// param -= condition_2; 
 	param /= diff; 
 	if( param > 1 )
 	{ param = 1.0; }
@@ -1407,4 +1411,49 @@ void NP_transformations( double dt )
 	}
 	
 	return; 
+}
+
+// add Ei source term !!!!!!!!!!!!!!!!!
+void add_Ei_source ( double dt )
+{
+	Cell* pCell = (*all_cells)[0];
+	static int Ei_index = pCell->custom_data.find_variable_index("Ei");
+	static int H_ions_index = microenvironment.find_density_index( "H+ ions" ); 
+
+	// #pragma omp parallel for  ??
+        for( int i=0; i < (*all_cells).size() ;i++ )	
+	   {
+		pCell = (*all_cells)[i];
+		
+		if( pCell->phenotype.death.dead == false )   
+		   {
+                          int ni = microenvironment.nearest_voxel_index( pCell->position ); 
+			  // the substrate_index is 6 (pH) 
+			
+			  // microenvironment(ni)[nanobio_parameters.NP1_to_NP2.NP_condition_substrate_index] += 
+			  //    dt * pCell->custom_data[Ei_index] / microenvironment.mesh.voxels[ni].volume; 
+			  microenvironment(ni)[H_ions_index] += dt * pCell->custom_data[Ei_index] * pCell->phenotype.volume.total / microenvironment.mesh.voxels[ni].volume ;  
+
+                          //std::cout << "cell_volume"<< pCell->phenotype.volume.total << std::endl;		
+		   }
+	    }
+			
+	return; 	
+	
+}
+
+// update the pH based on the H+ concentration 
+void update_pH( double dt )
+{
+	static int H_ions_index = microenvironment.find_density_index( "H+ ions" ); 
+	static int pH_index = microenvironment.find_density_index( "pH" );
+	
+	#pragma omp parallel for 
+	for( int k=0 ; k < microenvironment.number_of_voxels(); k++ )
+	{
+		microenvironment(k)[pH_index] = -log10(microenvironment(k)[H_ions_index]);			
+	}
+	
+	return;
+	
 }
