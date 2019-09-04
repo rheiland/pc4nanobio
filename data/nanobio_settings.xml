@@ -104,14 +104,13 @@
 			<enable>false</enable>
 		</legacy_data>
 	</save>
-	
-	<visualization>
-		<custom_data_index>4</custom_data_index>
-		<blue_value>0</blue_value>
-		<yellow_value>1</yellow_value>
-	</visualization>
-	
-	<substrates> <!-- done in nanobio.cpp  --> 
+
+	<user_parameters>
+		<tumor_radius type="double" units="micron">750</tumor_radius>
+		<enable_pH_effects type="bool" description="(disabled in this version)">false</enable_pH_effects>
+	</user_parameters>
+
+	<microenvironment_setup>
 		<variable name="oxygen" units="mmHg" ID="0">
 			<physical_parameter_set>
 				<diffusion_coefficient units="micron^2/min">100000.000000</diffusion_coefficient>
@@ -124,36 +123,36 @@
 				<decay_rate units="1/min">0.00003</decay_rate> <!-- 0.3 for glycolytic cells. 0.003 for normal tumor  --> 
 			</physical_parameter_set>
 		</variable>
-		<variable name="H+ ions" units="mMol" ID="2">
-			<physical_parameter_set>
-				<diffusion_coefficient units="micron^2/min">65000</diffusion_coefficient>   <!-- 65000  --> 
-				<decay_rate units="1/min">0</decay_rate>
-			</physical_parameter_set>
-		</variable>		
-		<variable name="ECM" units="dimensionless" ID="3">
+		<variable name="ECM" units="dimensionless" ID="2">
 			<physical_parameter_set>
 				<diffusion_coefficient units="micron^2/min">0</diffusion_coefficient>
 				<decay_rate units="1/min">0.0</decay_rate>
 			</physical_parameter_set>
 		</variable>
-		<variable name="NP1" units="dimensionless" ID="4">
-			<!-- overwrite below -->
-		</variable>
-		<variable name="NP2" units="dimensionless" ID="5">         
+		<variable name="NP1" units="dimensionless" ID="3">
 			<!-- overwrite below --> 
 			<physical_parameter_set>
 				<diffusion_coefficient units="micron^2/min">0</diffusion_coefficient>
 				<decay_rate units="1/min">0.0</decay_rate>
 			</physical_parameter_set>			
 		</variable>
-		<variable name="pH" units="none" ID="6">      <!-- adding a new substrate, close all stuff for it -->
+		<variable name="pH" units="dimensionless" ID="4">      
 			<physical_parameter_set>
 				<diffusion_coefficient units="micron^2/min">0</diffusion_coefficient>
 				<decay_rate units="1/min">0.0</decay_rate>
 			</physical_parameter_set>
 		</variable>
-		<calculate_gradients>true</calculate_gradients>
-	</substrates>
+		<options>
+			<calculate_gradients>true</calculate_gradients>
+			<track_internalized_substrates_in_each_agent>true</track_internalized_substrates_in_each_agent>
+		</options>
+	</microenvironment_setup>	
+	
+	<visualization>
+		<custom_data_index>4</custom_data_index>
+		<blue_value>0</blue_value>
+		<yellow_value>1</yellow_value>
+	</visualization>
 	
 <!-- tissue conditions --> 
 	<tissue_conditions> <!-- done in nanobio.cpp --> 
@@ -179,11 +178,6 @@
 		</substrates> 
 	</treatment>
 	
-<!-- initial tumor properties --> 
-
-	<tumor> <!-- done --> 
-		<radius units="micron">750</radius>
-	</tumor>
 	
 <!-- we're going to use "basic phenotype" that are custom to nanobio for now -->
 <!-- untreated cell properties --> 
@@ -258,27 +252,22 @@
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0.0</saturation_density>
 					</substrate>
-					<substrate name="H+ ions" units="mMol" ID="2">
-						<uptake_rate units="1/min">0</uptake_rate>
-						<secretion_rate units="1/min">0</secretion_rate>
-						<saturation_density units="">1.0</saturation_density>
-					</substrate>
-					<substrate name="ECM" units="dimensionless" ID="3">
+					<substrate name="ECM" units="dimensionless" ID="2">
 						<uptake_rate units="1/min">0</uptake_rate>
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0</saturation_density>
 					</substrate>
-					<substrate name="NP1" units="dimensionless" ID="4">
+					<substrate name="NP1" units="dimensionless" ID="3">
 						<uptake_rate units="1/min">0</uptake_rate>
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0</saturation_density>
 					</substrate>			
-					<substrate name="NP2" units="dimensionless" ID="5">
+					<substrate name="NP2" units="dimensionless" ID="4">
 						<uptake_rate units="1/min">0</uptake_rate>
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0</saturation_density>
 					</substrate>
-					<substrate name="pH" units="none" ID="6">
+					<substrate name="pH" units="dimensionless" ID="5">
 						<uptake_rate units="1/min">0</uptake_rate>
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0</saturation_density>
@@ -396,27 +385,22 @@
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0.0</saturation_density>
 							</substrate>
-							<substrate name="H+ ions" units="mMol" ID="2">
-								<uptake_rate units="1/min">0</uptake_rate>
-								<secretion_rate units="1/min">0</secretion_rate>
-								<saturation_density units="">1.0</saturation_density>
-							</substrate>
-							<substrate name="ECM" units="dimensionless" ID="3">
+							<substrate name="ECM" units="dimensionless" ID="2">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>
-							<substrate name="NP1" units="dimensionless" ID="4">
+							<substrate name="NP1" units="dimensionless" ID="3">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>			
-							<substrate name="NP2" units="dimensionless" ID="5">
+							<substrate name="NP2" units="dimensionless" ID="4">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>
-							<substrate name="pH" units="none" ID="6">
+							<substrate name="pH" units="dimensionless" ID="5">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
@@ -532,27 +516,22 @@
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0.0</saturation_density>
 							</substrate>
-							<substrate name="H+ ions" units="mMol" ID="2">
-								<uptake_rate units="1/min">0</uptake_rate>
-								<secretion_rate units="1/min">0</secretion_rate>
-								<saturation_density units="">1.0</saturation_density>
-							</substrate>
-							<substrate name="ECM" units="dimensionless" ID="3">
+							<substrate name="ECM" units="dimensionless" ID="2">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>
-							<substrate name="NP1" units="dimensionless" ID="4">
+							<substrate name="NP1" units="dimensionless" ID="3">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>			
-							<substrate name="NP2" units="dimensionless" ID="5">
+							<substrate name="NP2" units="dimensionless" ID="4">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>
-							<substrate name="pH" units="none" ID="6">
+							<substrate name="pH" units="dimensionless" ID="5">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>

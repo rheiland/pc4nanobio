@@ -7,11 +7,14 @@ import glob
 import shutil
 import datetime
 import tempfile
+from about import AboutTab
 from config import ConfigTab
+from microenv_params import MicroenvTab
+from user_params import UserTab
 from cells import CellsTab
 from nano import NanoTab
 from svg import SVGTab
-from mydata import DataTab
+# from mydata import DataTab
 from substrates import SubstrateTab
 from pathlib import Path
 from debug import debug_view
@@ -23,7 +26,10 @@ tab_layout = widgets.Layout(width='auto',   # border='2px solid black',
                             height=tab_height, overflow_y='scroll',)
 
 # create the tabs, but don't display yet
+about_tab = AboutTab()
 config_tab = ConfigTab()
+microenv_tab = MicroenvTab()
+user_tab = UserTab()
 cells = CellsTab()
 
 full_filename = os.path.abspath('data/nanobio_settings.xml')
@@ -33,7 +39,7 @@ xml_root = tree.getroot()
 nanopart = NanoTab(xml_root)
 svg = SVGTab()
 sub = SubstrateTab()
-mydata = DataTab()
+# mydata = DataTab()
 
 nanoHUB_flag = "home/nanohub" in os.environ['HOME']  # True/False (running on nanoHUB or not)
 
@@ -276,8 +282,9 @@ read_config.observe(read_config_cb, names='value')
 # )
 # write_config_row = widgets.HBox([write_config_button, write_config_box])
 
-titles = ['Config Basics', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrate Plots']
-tabs = widgets.Tab(children=[config_tab.tab, cells.tab, nanopart.tab, svg.tab, sub.tab],
+#titles = ['Config', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrate Plots']
+titles = ['About','Config Basics','Microenviron','User Params', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrates']
+tabs = widgets.Tab(children=[about_tab.tab, config_tab.tab, microenv_tab.tab, user_tab.tab, cells.tab, nanopart.tab, svg.tab, sub.tab],
                    _titles={i: t for i, t in enumerate(titles)},
                    layout=tab_layout)
 

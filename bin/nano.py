@@ -421,7 +421,7 @@ class NanoParticle(object):
             self.saturation_density[idx].children[0].disabled = disabled_flag
 
     #----------------------------------------
-    def fill_gui(self):  # for NanoParticles - both Preform (spherical) and (rod)
+    def fill_gui(self):  # for NanoParticles - both Type1 and Type2
 #        self.xml_root = xml_root  # for debugging
 #        uep = xml_root.find('.//nanoparticle')  # find unique entry point into XML 
         uep = self.xml_uep
@@ -528,7 +528,7 @@ class NanoParticle(object):
 #            if idx == 2:
 #                break
 
-    def fill_xml(self, uep):  # for NanoParticles - both Preform (spherical) and (rod)
+    def fill_xml(self, uep):  # for NanoParticles - both Type1 and Type2
 #        uep = xml_root.find('.//nanoparticle')  # find unique entry point into XML
 #        uep = self.xml_uep
 
@@ -617,7 +617,7 @@ class NanoParticle(object):
 
 
 #============================
-class NanoSphere(NanoParticle):
+class NanoType1(NanoParticle):
 
     def __init__(self, xml_root):
         uep = xml_root.find('.//nanoparticle')  # find unique entry point into XML for (1st) nanoparticle
@@ -628,7 +628,7 @@ class NanoSphere(NanoParticle):
         super().fill_xml(uep)
 
 #============================
-class NanoRod(NanoParticle):
+class NanoType2(NanoParticle):
 
     def __init__(self, xml_root):
         for np in xml_root.iter('nanoparticle'):  # hacky: iterate thru all (2) NPs to land on last/2nd
@@ -734,13 +734,11 @@ class NanoTab(object):
     def __init__(self, xml_root):
 
 #        uep = xml_root.find('.//nanoparticle')  # find unique entry point into XML for (1st) nanoparticle
-#        self.sphere = NanoParticle('red', uep)
-        self.sphere = NanoSphere(xml_root)
+        self.type1 = NanoType1(xml_root)
 
 #        for np in xml_root.iter('nanoparticle'):  # hacky: iterate thru all (2) NPs to land on last/2nd
 #            uep = np
-#        self.rod = NanoParticle('black', uep)
-        self.rod = NanoRod(xml_root)
+        self.type2 = NanoType2(xml_root)
 
         self.xform = NanoTransform()
 
@@ -748,19 +746,21 @@ class NanoTab(object):
         tab_layout = Layout(width='800px',   # border='2px solid black',
                             height=tab_height, overflow_y='scroll')
 
-        self.tab = Tab(children=[self.sphere.tab, self.rod.tab, self.xform.tab])
-        self.tab.set_title(0, 'Preform (spherical)')
-        self.tab.set_title(1, 'Reconfig (rod)')
-        self.tab.set_title(2, 'Transformations')
+        # self.tab = Tab(children=[self.type1.tab, self.type2.tab, self.xform.tab])
+        # self.tab.set_title(0, 'Type 1')
+        # self.tab.set_title(1, 'Type 2')
+        # self.tab.set_title(2, 'Transformations')
+        self.tab = Tab(children=[self.type1.tab])
+        self.tab.set_title(0, 'Type 1')
 
     def fill_gui(self, xml_root):
 #        uep = xml_root.find('.//cell_definition')  # find unique entry point into XML 
-        self.sphere.fill_gui()
-        self.rod.fill_gui()
-        self.xform.fill_gui(xml_root)
+        self.type1.fill_gui()
+        # self.type2.fill_gui()
+        # self.xform.fill_gui(xml_root)
 
     def fill_xml(self, xml_root):
-        self.sphere.fill_xml(xml_root)
-        self.rod.fill_xml(xml_root)
+        self.type1.fill_xml(xml_root)
+        # self.type2.fill_xml(xml_root)
 #        self.xform.fill_gui(xml_root)
 

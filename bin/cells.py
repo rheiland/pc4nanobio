@@ -274,15 +274,15 @@ class CellsTab(object):
         self.o2_hypoxic_saturation.children[0].value = float(uep.find('.//o2_hypoxic_saturation').text)
 
         # wow, this actually works :-)
-        sep = uep.find('.//secretion')  # secretion entry point
-        idx = 0
-        for el in sep.findall('substrate'):  # currently 6 substrates - find all of them
-            kids = el.getchildren()  # assume 3, which follow:
-            self.uptake_rate[idx].children[0].value = float(kids[0].text)
-            self.secretion_rate[idx].children[0].value = float(kids[1].text)
-            self.saturation_density[idx].children[0].value = float(kids[2].text)
-            idx += 1
-#            if idx == 2:
+#         sep = uep.find('.//secretion')  # secretion entry point
+#         idx = 0
+#         for el in sep.findall('substrate'):  # currently 6 substrates - find all of them
+#             kids = el.getchildren()  # assume 3, which follow:
+#             self.uptake_rate[idx].children[0].value = float(kids[0].text)
+#             self.secretion_rate[idx].children[0].value = float(kids[1].text)
+#             self.saturation_density[idx].children[0].value = float(kids[2].text)
+#             idx += 1
+# #            if idx == 2:
 #                break
 
     # Read values from the GUI widgets and generate/write a new XML
@@ -331,12 +331,12 @@ class CellsTab(object):
         uep.find('.//o2_hypoxic_response').text = str(self.o2_hypoxic_response.children[0].value)
         uep.find('.//o2_hypoxic_saturation').text = str(self.o2_hypoxic_saturation.children[0].value)
 
-        sep = uep.find('.//secretion')  # secretion entry point
-        idx = 0
-        for el in sep.findall('substrate'):  # currently 6 substrates - find all of them
-            kids = el.getchildren()  # assume 3, which follow:
-            kids[0].text = str(self.uptake_rate[idx].children[0].value)
-            kids[1].text = str(self.secretion_rate[idx].children[0].value)
-            kids[2].text = str(self.saturation_density[idx].children[0].value)
-            idx += 1
+      #   sep = uep.find('.//secretion')  # secretion entry point
+      #   idx = 0
+      #   for el in sep.findall('substrate'):  # currently 6 substrates - find all of them
+      #       kids = el.getchildren()  # assume 3, which follow:
+      #       kids[0].text = str(self.uptake_rate[idx].children[0].value)
+      #       kids[1].text = str(self.secretion_rate[idx].children[0].value)
+      #       kids[2].text = str(self.saturation_density[idx].children[0].value)
+      #       idx += 1
 
