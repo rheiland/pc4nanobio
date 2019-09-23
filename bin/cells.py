@@ -22,7 +22,7 @@ class CellsTab(object):
            description='max birth rate', style={'description_width': 'initial'}, layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units))
         self.o2_proliferation_saturation = HBox([BoundedFloatText(min=0, step=0.1,
-           description='o2: prolif sat', layout=Layout(width=constWidth), ), Label('mmHg')], 
+           description='O2: prolif sat', layout=Layout(width=constWidth), ), Label('mmHg')], 
            layout=Layout(width=width_cell_params_units))
         self.o2_proliferation_threshold = HBox([BoundedFloatText(min=0, step=0.1,
            description='prolif thresh', layout=Layout(width=constWidth), ), Label('mmHg')], 
@@ -46,7 +46,7 @@ class CellsTab(object):
            description='max rate', layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units))
         self.o2_necrosis_threshold = HBox([BoundedFloatText(min=0, step=0.1,
-           description='o2: thresh', layout=Layout(width=constWidth), ), Label('mmHg')], 
+           description='O2: thresh', layout=Layout(width=constWidth), ), Label('mmHg')], 
            layout=Layout(width=width_cell_params_units))
         self.o2_necrosis_max = HBox([BoundedFloatText(min=0, step=0.1,
            description='max', layout=Layout(width=constWidth), ), Label('mmHg')], 
@@ -129,7 +129,7 @@ class CellsTab(object):
         #-------------------------------
         label_hypoxia = Label('Hypoxia:')
         self.o2_hypoxic_threshold = HBox([BoundedFloatText(min=0, step=0.1,
-           description='o2: threshold', layout=Layout(width=constWidth), ), Label('mmHg')], 
+           description='O2: threshold', layout=Layout(width=constWidth), ), Label('mmHg')], 
            layout=Layout(width=width_cell_params_units))
         self.o2_hypoxic_response = HBox([BoundedFloatText(min=0, step=0.1,
            description='response', layout=Layout(width=constWidth), ), Label('mmHg')], 
@@ -146,13 +146,13 @@ class CellsTab(object):
 
 
         self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
-           description='o2: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
+           description='O2: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units)) )
         self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.01,
            description='Glc: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units)) )
         self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
-           description='H+: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
+           description='pH: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units)) )
         self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
            description='ECM: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
@@ -160,9 +160,9 @@ class CellsTab(object):
         self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
            description='NP1: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
            layout=Layout(width=width_cell_params_units)) )
-        self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
-           description='NP2: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
-           layout=Layout(width=width_cell_params_units)) )
+#        self.uptake_rate.append(  HBox([BoundedFloatText(min=0, step=0.1,
+#           description='NP2: uptake rate', layout=Layout(width=constWidth), ), Label('1/min')], 
+#           layout=Layout(width=width_cell_params_units)) )
 
 
         for idx in range(6):
@@ -207,8 +207,8 @@ class CellsTab(object):
           HBox([self.uptake_rate[1], self.secretion_rate[1], self.saturation_density[1] ]),
           HBox([self.uptake_rate[2], self.secretion_rate[2], self.saturation_density[2] ]),
           HBox([self.uptake_rate[3], self.secretion_rate[3], self.saturation_density[3] ]),
-          HBox([self.uptake_rate[4], self.secretion_rate[4], self.saturation_density[4] ]),
-          HBox([self.uptake_rate[5], self.secretion_rate[5], self.saturation_density[5] ]) ],
+          HBox([self.uptake_rate[4], self.secretion_rate[4], self.saturation_density[4] ]), ],
+#          HBox([self.uptake_rate[5], self.secretion_rate[5], self.saturation_density[5] ]) ],
           layout=box_layout)
 
         self.tab = VBox([self.cell_name, cycle_box, necrosis_box, apoptosis_box,

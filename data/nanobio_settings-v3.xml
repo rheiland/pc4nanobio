@@ -262,6 +262,11 @@
 						<secretion_rate units="1/min">0</secretion_rate>
 						<saturation_density units="">0</saturation_density>
 					</substrate>			
+					<substrate name="NP2" units="dimensionless" ID="4">
+						<uptake_rate units="1/min">0</uptake_rate>
+						<secretion_rate units="1/min">0</secretion_rate>
+						<saturation_density units="">0</saturation_density>
+					</substrate>
 					<substrate name="pH" units="dimensionless" ID="5">
 						<uptake_rate units="1/min">0</uptake_rate>
 						<secretion_rate units="1/min">0</secretion_rate>
@@ -390,6 +395,11 @@
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>			
+							<substrate name="NP2" units="dimensionless" ID="4">
+								<uptake_rate units="1/min">0</uptake_rate>
+								<secretion_rate units="1/min">0</secretion_rate>
+								<saturation_density units="">0</saturation_density>
+							</substrate>
 							<substrate name="pH" units="dimensionless" ID="5">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>
@@ -516,6 +526,11 @@
 								<secretion_rate units="1/min">0</secretion_rate>
 								<saturation_density units="">0</saturation_density>
 							</substrate>			
+							<substrate name="NP2" units="dimensionless" ID="4">
+								<uptake_rate units="1/min">0</uptake_rate>
+								<secretion_rate units="1/min">0</secretion_rate>
+								<saturation_density units="">0</saturation_density>
+							</substrate>
 							<substrate name="pH" units="dimensionless" ID="5">
 								<uptake_rate units="1/min">0</uptake_rate>
 								<secretion_rate units="1/min">0</secretion_rate>

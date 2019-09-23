@@ -88,15 +88,15 @@
 	</parallel> 
 	
 	<save> <!-- done --> 
-		<folder>output2</folder> <!-- use . for root --> 
+		<folder>output</folder> <!-- use . for root --> 
 
 		<full_data>
-			<interval units="min">60</interval>
+			<interval units="min">10</interval>
 			<enable>true</enable>
 		</full_data>
 		
 		<SVG>
-			<interval units="min">60</interval>
+			<interval units="min">10</interval>
 			<enable>true</enable>
 		</SVG>
 		

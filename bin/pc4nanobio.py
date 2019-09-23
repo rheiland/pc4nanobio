@@ -43,7 +43,6 @@ sub = SubstrateTab()
 
 nanoHUB_flag = "home/nanohub" in os.environ['HOME']  # True/False (running on nanoHUB or not)
 
-
 def read_config_cb(_b):
     with debug_view:
         print("read_config_cb", read_config.value)
@@ -283,7 +282,7 @@ read_config.observe(read_config_cb, names='value')
 # write_config_row = widgets.HBox([write_config_button, write_config_box])
 
 #titles = ['Config', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrate Plots']
-titles = ['About','Config Basics','Microenviron','User Params', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrates']
+titles = ['About','Config Basics','Microenvironment','User Params', 'Cell Properties', 'Nanoparticles', 'Out: Cell Plots', 'Out: Substrates']
 tabs = widgets.Tab(children=[about_tab.tab, config_tab.tab, microenv_tab.tab, user_tab.tab, cells.tab, nanopart.tab, svg.tab, sub.tab],
                    _titles={i: t for i, t in enumerate(titles)},
                    layout=tab_layout)
