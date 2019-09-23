@@ -88,7 +88,7 @@
 	</parallel> 
 	
 	<save> <!-- done --> 
-		<folder>output2</folder> <!-- use . for root --> 
+		<folder>.</folder> <!-- use . for root --> 
 
 		<full_data>
 			<interval units="min">60</interval>
