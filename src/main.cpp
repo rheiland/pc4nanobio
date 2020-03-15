@@ -3,33 +3,37 @@
 # If you use PhysiCell in your project, please cite PhysiCell and the version #
 # number, such as below:                                                      #
 #                                                                             #
-# We implemented and solved the model using PhysiCell (Version 1.2.2) [1].    #
+# We implemented and solved the model using PhysiCell (Version x.y.z) [1].    #
 #                                                                             #
 # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
 #     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
-#     lar Systems, PLoS Comput. Biol. 2017 (in review).                       #
-#     preprint DOI: 10.1101/088773                                            #
+#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
+#     DOI: 10.1371/journal.pcbi.1005991                                       #
+#                                                                             #
+# See VERSION.txt or call get_PhysiCell_version() to get the current version  #
+#     x.y.z. Call display_citations() to get detailed information on all cite-#
+#     able software used in your PhysiCell application.                       #
 #                                                                             #
 # Because PhysiCell extensively uses BioFVM, we suggest you also cite BioFVM  #
 #     as below:                                                               #
 #                                                                             #
-# We implemented and solved the model using PhysiCell (Version 1.2.2) [1],    #
+# We implemented and solved the model using PhysiCell (Version x.y.z) [1],    #
 # with BioFVM [2] to solve the transport equations.                           #
 #                                                                             #
 # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
 #     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
-#     lar Systems, PLoS Comput. Biol. 2017 (in review).                       #
-#     preprint DOI: 10.1101/088773                                            #
+#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
+#     DOI: 10.1371/journal.pcbi.1005991                                       #
 #                                                                             #
 # [2] A Ghaffarizadeh, SH Friedman, and P Macklin, BioFVM: an efficient para- #
-#    llelized diffusive transport solver for 3-D biological simulations,      #
-#    Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730   #
+#     llelized diffusive transport solver for 3-D biological simulations,     #
+#     Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730  #
 #                                                                             #
 ###############################################################################
 #                                                                             #
 # BSD 3-Clause License (see https://opensource.org/licenses/BSD-3-Clause)     #
 #                                                                             #
-# Copyright (c) 2015-2017, Paul Macklin and the PhysiCell Project             #
+# Copyright (c) 2015-2018, Paul Macklin and the PhysiCell Project             #
 # All rights reserved.                                                        #
 #                                                                             #
 # Redistribution and use in source and binary forms, with or without          #
@@ -72,20 +76,12 @@
 #include "./core/PhysiCell.h"
 #include "./modules/PhysiCell_standard_modules.h" 
 
-// custom user modules 
+// put custom code modules here! 
 
 #include "./custom_modules/nanobio.h" 
 	
 using namespace BioFVM;
 using namespace PhysiCell;
-
-// feed this "upstream" into PhysiCell 1.3.1 
-double time_since_last_mechanics_update( void )
-{ return PhysiCell_globals.current_time - ((Cell_Container *)microenvironment.agent_container)->last_mechanics_time; }
-
-// feed this "upstream" into PhysiCell 1.3.1 
-double time_since_last_phenotype_update( void )
-{ return  PhysiCell_globals.current_time - ((Cell_Container *)microenvironment.agent_container)->last_cell_cycle_time; }
 
 int main( int argc, char* argv[] )
 {
@@ -95,35 +91,34 @@ int main( int argc, char* argv[] )
 	if( argc > 1 )
 	{ XML_status = load_PhysiCell_config_file( argv[1] ); }
 	else
-	{ XML_status = load_PhysiCell_config_file( "./config/nanobio_settings.xml" ); }
+	{ XML_status = load_PhysiCell_config_file( "./config/PhysiCell_settings.xml" ); }
 	if( !XML_status )
 	{ exit(-1); }
 	
 	// OpenMP setup
 	omp_set_num_threads(PhysiCell_settings.omp_num_threads);
 	
-	// PNRG setup 
-	SeedRandom(); 
-	
 	// time setup 
 	std::string time_units = "min"; 
 
 	/* Microenvironment setup */ 
 	
-	parse_nanobio_parameters(); 
-	setup_microenvironment(); 
-
+	setup_microenvironment(); // modify this in the custom code 
+	
 	/* PhysiCell setup */ 
  	
 	// set mechanics voxel size, and match the data structure to BioFVM
 	double mechanics_voxel_size = 30; 
 	Cell_Container* cell_container = create_cell_container_for_microenvironment( microenvironment, mechanics_voxel_size );
 	
-	create_cell_types();
-	setup_tissue();
-	
 	/* Users typically start modifying here. START USERMODS */ 
 	
+	create_cell_types();
+	
+	setup_tissue();
+	
+	create_fixed_var();  // compute the fixed global variables for NPs-bin  !!!!!!!!!!!!! 
+
 	/* Users typically stop modifying here. END USERMODS */ 
 	
 	// set MultiCellDS save options 
@@ -134,7 +129,7 @@ int main( int argc, char* argv[] )
 	set_save_biofvm_cell_data_as_custom_matlab( true );
 	
 	// save a simulation snapshot 
-
+	
 	char filename[1024];
 	sprintf( filename , "%s/initial" , PhysiCell_settings.folder.c_str() ); 
 	save_PhysiCell_to_MultiCellDS_xml_pugi( filename , microenvironment , PhysiCell_globals.current_time ); 
@@ -146,10 +141,12 @@ int main( int argc, char* argv[] )
 
 	// for simplicity, set a pathology coloring function 
 	
-	std::vector<std::string> (*cell_coloring_function)(Cell*) = nanobio_coloring_function; // false_cell_coloring_live_dead; // nanobio_coloring_function;
+	std::vector<std::string> (*cell_coloring_function)(Cell*) = nanobio_coloring_function; 
 	
 	sprintf( filename , "%s/initial.svg" , PhysiCell_settings.folder.c_str() ); 
 	SVG_plot( filename , microenvironment, 0.0 , PhysiCell_globals.current_time, cell_coloring_function );
+	
+	display_citations(); 
 	
 	// set the performance timers 
 
@@ -164,11 +161,11 @@ int main( int argc, char* argv[] )
 		report_file.open(filename); 	// create the data log file 
 		report_file<<"simulated time\tnum cells\tnum division\tnum death\twall time"<<std::endl;
 	}
-		
+	
 	// main loop 
-
+	
 	try 
-	{	
+	{		
 		while( PhysiCell_globals.current_time < PhysiCell_settings.max_time + 0.1*diffusion_dt )
 		{
 			// save data if it's time. 
@@ -204,27 +201,32 @@ int main( int argc, char* argv[] )
 				}
 			}
 			
-			// check for therapy, and apply it 
-			
-			apply_therapies(); 
-			
+
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
-		
-			// NP-ECM interactions
-	//		NP_ECM_binding_model( diffusion_dt ); 
-			
-	                // updata the Ei source !!!
-			add_Ei_source ( diffusion_dt );
-			
-			// updata pH based on H+ concdentration !!!
-			update_pH( diffusion_dt );  
-			
-			// NP transformations 
-			NP_transformations( diffusion_dt );
 			
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
+			
+			
+			// Custom add-ons could potentially go here. 
+			
+			// update the intern NPs model every 6 mins  !!!
+			static double next_update_time = 0.0;
+            static int update_time_multiplier = 0;
+            static double update_dt = 6.0; // update every 6 minutes
+            static double tolerance = 0.01 * diffusion_dt; 
+			
+			if( PhysiCell_globals.current_time > next_update_time - tolerance )
+	        { 	
+	        	update_time_multiplier++;
+				next_update_time = update_time_multiplier*update_dt;  
+				intern_NPs();   // internalization NPs every 6 mins !!!!
+			}      
+			
+			
+			PK_model();   // update / release drug every 0.01 mins !!!!
+			
 			
 			PhysiCell_globals.current_time += diffusion_dt;
 		}
@@ -255,6 +257,3 @@ int main( int argc, char* argv[] )
 
 	return 0; 
 }
-
-
-

@@ -127,9 +127,8 @@ class Microenvironment
 	*/
 	std::vector< std::vector<double> > dirichlet_value_vectors; 
 	std::vector<bool> dirichlet_activation_vector; 	
-		
  public:
- 
+	
 	/*! The mesh for the diffusing quantities */ 
 	Cartesian_Mesh mesh;
 	Agent_Container * agent_container;	
@@ -160,9 +159,9 @@ class Microenvironment
 		
 	/*! functions to simplify size queries */ 
 	
-	int number_of_densities( void ); 
-	int number_of_voxels( void ); 
-	int number_of_voxel_faces( void ); 
+	unsigned int number_of_densities( void ); 
+	unsigned int number_of_voxels( void ); 
+	unsigned int number_of_voxel_faces( void ); 
 
  	
 	void auto_choose_diffusion_decay_solver( void ); 
@@ -186,10 +185,10 @@ class Microenvironment
 	int find_density_index( std::string name ); 
 	
 	int voxel_index( int i, int j, int k ); 
-	std::vector<int> cartesian_indices( int n ); 
+	std::vector<unsigned int> cartesian_indices( int n ); 
 	
 	int nearest_voxel_index( std::vector<double>& position ); 
-	std::vector<int> nearest_cartesian_indices( std::vector<double>& position ); 
+	std::vector<unsigned int> nearest_cartesian_indices( std::vector<double>& position ); 
 	Voxel& nearest_voxel( std::vector<double>& position ); 
 	Voxel& voxels( int voxel_index );
 	std::vector<double>& nearest_density_vector( std::vector<double>& position );  
@@ -234,12 +233,12 @@ class Microenvironment
 	
 	void add_dirichlet_node( int voxel_index, std::vector<double>& value ); 
 	void update_dirichlet_node( int voxel_index , std::vector<double>& new_value ); 
-	void update_dirichlet_node( int voxel_index , int substrate_index , double new_value ); 
-
+	void update_dirichlet_node( int voxel_index , int substrate_index , double new_value );
 	void remove_dirichlet_node( int voxel_index ); 
 	void apply_dirichlet_conditions( void ); 
 
 	void set_substrate_dirichlet_activation( int substrate_index , bool new_value ); 
+	double get_substrate_dirichlet_activation( int substrate_index ); 
 	
 	bool& is_dirichlet_node( int voxel_index ); 
 
@@ -302,6 +301,8 @@ class Microenvironment_Options
 	std::vector<double> Dirichlet_condition_vector; 
 	std::vector<bool> Dirichlet_activation_vector; 
 	
+	std::vector<double> initial_condition_vector; 
+	
 	bool simulate_2D; 
 	std::vector<double> X_range; 
 	std::vector<double> Y_range; 
@@ -312,6 +313,8 @@ class Microenvironment_Options
 	bool calculate_gradients; 
 	
 	bool use_oxygen_as_first_field;
+	
+	bool track_internalized_substrates_in_each_agent; 	
 };
 
 extern Microenvironment_Options default_microenvironment_options; 

@@ -1,6 +1,5 @@
-VERSION := 0.0.1
-PROGRAM_NAME := pc-nb
-BIN = ../bin
+VERSION := $(shell grep . VERSION.txt | cut -f1 -d:)
+PROGRAM_NAME:= myproj
 
 CC := g++
 # CC := g++-mp-7 # typical macports compiler name
@@ -31,33 +30,33 @@ ARCH := native # best auto-tuning
 # ARCH := nocona #64-bit pentium 4 or later 
 
 # CFLAGS := -march=$(ARCH) -Ofast -s -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
-CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
+# remove the -march arg to avoid SIGILL error on nanoHUB
+CFLAGS := -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
 
 COMPILE_COMMAND := $(CC) $(CFLAGS) 
 
 BioFVM_OBJECTS := BioFVM_vector.o BioFVM_mesh.o BioFVM_microenvironment.o BioFVM_solvers.o BioFVM_matlab.o \
 BioFVM_utilities.o BioFVM_basic_agent.o BioFVM_MultiCellDS.o BioFVM_agent_container.o 
 
-PhysiCell_core_OBJECTS := PhysiCell_phenotype.o PhysiCell_cell_container.o PhysiCell_standard_models.o PhysiCell_cell.o PhysiCell_custom.o PhysiCell_utilities.o 
+PhysiCell_core_OBJECTS := PhysiCell_phenotype.o PhysiCell_cell_container.o PhysiCell_standard_models.o \
+PhysiCell_cell.o PhysiCell_custom.o PhysiCell_utilities.o 
 
-PhysiCell_module_OBJECTS := PhysiCell_SVG.o PhysiCell_pathology.o PhysiCell_MultiCellDS.o PhysiCell_various_outputs.o
+PhysiCell_module_OBJECTS := PhysiCell_SVG.o PhysiCell_pathology.o PhysiCell_MultiCellDS.o PhysiCell_various_outputs.o \
+PhysiCell_pugixml.o PhysiCell_settings.o
 
 # put your custom objects here (they should be in the custom_modules directory)
 
-PhysiCell_custom_module_OBJECTS := PhysiCell_pugixml.o nanobio.o PhysiCell_settings.o 
+PhysiCell_custom_module_OBJECTS := nanobio.o
 
 pugixml_OBJECTS := pugixml.o
 
 PhysiCell_OBJECTS := $(BioFVM_OBJECTS)  $(pugixml_OBJECTS) $(PhysiCell_core_OBJECTS) $(PhysiCell_module_OBJECTS)
 ALL_OBJECTS := $(PhysiCell_OBJECTS) $(PhysiCell_custom_module_OBJECTS)
 
-# compile the project  
+# compile the project 
 
 all: main.cpp $(ALL_OBJECTS)
 	$(COMPILE_COMMAND) -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp 
-
-install: all
-	install --mode 0755 -D $(PROGRAM_NAME) $(BIN)
 
 # PhysiCell core components	
 
@@ -127,33 +126,47 @@ PhysiCell_MultiCellDS.o: ./modules/PhysiCell_MultiCellDS.cpp
 
 PhysiCell_various_outputs.o: ./modules/PhysiCell_various_outputs.cpp
 	$(COMPILE_COMMAND) -c ./modules/PhysiCell_various_outputs.cpp
-	
-PhysiCell_pugixml.o: ./modules/PhysiCell_pugixml.cpp
-	$(COMPILE_COMMAND) -c ./modules/PhysiCell_pugixml.cpp 
 
-PhysiCell_settings.o: ./modules/PhysiCell_settings.cpp
-	$(COMPILE_COMMAND) -c ./modules/PhysiCell_settings.cpp 
+PhysiCell_pugixml.o: ./modules/PhysiCell_pugixml.cpp
+	$(COMPILE_COMMAND) -c ./modules/PhysiCell_pugixml.cpp
 	
-	# user-defined PhysiCell modules
+PhysiCell_settings.o: ./modules/PhysiCell_settings.cpp
+	$(COMPILE_COMMAND) -c ./modules/PhysiCell_settings.cpp
+	
+# user-defined PhysiCell modules
 
 nanobio.o: ./custom_modules/nanobio.cpp 
 	$(COMPILE_COMMAND) -c ./custom_modules/nanobio.cpp
 
-	
 # cleanup
+
+reset:
+	rm -f *.cpp 
+	cp ./sample_projects/Makefile-default Makefile 
+	rm -f ./custom_modules/*
+	touch ./custom_modules/empty.txt 
+	touch ALL_CITATIONS.txt 
+	rm ALL_CITATIONS.txt 
+	cp ./config/PhysiCell_settings-backup.xml ./config/PhysiCell_settings.xml 
 	
+# next 2 targets for nanoHUB
+install: 
+	. /etc/environ.sh; use -e -r anaconda3-5.1; make all
+	cp $(PROGRAM_NAME) ../bin
+
+distclean: clean
+	rm -f ../bin/$(PROGRAM_NAME)
+
 clean:
 	rm -f *.o
 	rm -f $(PROGRAM_NAME)
-	
-distclean: clean
-	rm -f $(BIN)/$(PROGRAM_NAME)
 	
 data-cleanup:
 	rm -f *.mat
 	rm -f *.xml
 	rm -f *.svg
 	rm -f ./output/*
+	touch ./output/empty.txt
 	
 # archival 
 	
@@ -176,4 +189,3 @@ unzip:
 untar: 
 	cp ./archives/latest.tar .
 	tar -xzf latest.tar
-
