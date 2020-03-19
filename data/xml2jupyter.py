@@ -254,7 +254,8 @@ for child in uep:
     else:
         describe_str = ""
     desc_row_name = "desc_button" + str(param_count)
-    desc_buttons_str += indent + desc_row_name + " = " + "Button(description='" + describe_str + "', disabled=True, layout=desc_button_layout) \n"
+    # desc_buttons_str += indent + desc_row_name + " = " + "Button(description='" + describe_str + "', disabled=True, layout=desc_button_layout) \n"
+    desc_buttons_str += indent + desc_row_name + " = " + "Button(description='" + describe_str + "' , tooltip='" + describe_str + "', disabled=True, layout=desc_button_layout) \n"
     if (param_count % 2):
         desc_buttons_str += indent + desc_row_name + ".style.button_color = '" + colorname1 + "'\n"
     else:  # rf.  https://www.w3schools.com/colors/colors_names.asp
