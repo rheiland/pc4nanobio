@@ -516,105 +516,105 @@ class UserTab(object):
         units_button50 = Button(description='1/min', disabled=True, layout=units_button_layout) 
         units_button50.style.button_color = 'tan'
 
-        desc_button1 = Button(description='Initialize the random number generator', disabled=True, layout=desc_button_layout) 
+        desc_button1 = Button(description='Initialize the random number generator' , tooltip='Initialize the random number generator', disabled=True, layout=desc_button_layout) 
         desc_button1.style.button_color = 'lightgreen'
-        desc_button2 = Button(description='Initial tumor radius', disabled=True, layout=desc_button_layout) 
+        desc_button2 = Button(description='Initial tumor radius' , tooltip='Initial tumor radius', disabled=True, layout=desc_button_layout) 
         desc_button2.style.button_color = 'tan'
-        desc_button3 = Button(description='Uptake rate of oxygen', disabled=True, layout=desc_button_layout) 
+        desc_button3 = Button(description='Uptake rate of oxygen' , tooltip='Uptake rate of oxygen', disabled=True, layout=desc_button_layout) 
         desc_button3.style.button_color = 'lightgreen'
-        desc_button4 = Button(description='Maximum birth rate', disabled=True, layout=desc_button_layout) 
+        desc_button4 = Button(description='Maximum birth rate' , tooltip='Maximum birth rate', disabled=True, layout=desc_button_layout) 
         desc_button4.style.button_color = 'tan'
-        desc_button5 = Button(description='Oxygen value above which the proliferation rate is maximized', disabled=True, layout=desc_button_layout) 
+        desc_button5 = Button(description='Oxygen value above which the proliferation rate is maximized' , tooltip='Oxygen value above which the proliferation rate is maximized', disabled=True, layout=desc_button_layout) 
         desc_button5.style.button_color = 'lightgreen'
-        desc_button6 = Button(description='Oxygen value below which the proliferation ceases', disabled=True, layout=desc_button_layout) 
+        desc_button6 = Button(description='Oxygen value below which the proliferation ceases' , tooltip='Oxygen value below which the proliferation ceases', disabled=True, layout=desc_button_layout) 
         desc_button6.style.button_color = 'tan'
-        desc_button7 = Button(description='Oxygen value that corresponds to the reference phenotype', disabled=True, layout=desc_button_layout) 
+        desc_button7 = Button(description='Oxygen value that corresponds to the reference phenotype' , tooltip='Oxygen value that corresponds to the reference phenotype', disabled=True, layout=desc_button_layout) 
         desc_button7.style.button_color = 'lightgreen'
-        desc_button8 = Button(description='Maximum necrosis rate', disabled=True, layout=desc_button_layout) 
+        desc_button8 = Button(description='Maximum necrosis rate' , tooltip='Maximum necrosis rate', disabled=True, layout=desc_button_layout) 
         desc_button8.style.button_color = 'tan'
-        desc_button9 = Button(description='Oxygen value at which necrosis starts', disabled=True, layout=desc_button_layout) 
+        desc_button9 = Button(description='Oxygen value at which necrosis starts' , tooltip='Oxygen value at which necrosis starts', disabled=True, layout=desc_button_layout) 
         desc_button9.style.button_color = 'lightgreen'
-        desc_button10 = Button(description='Oxygen value at which necrosis reaches its maximum rate', disabled=True, layout=desc_button_layout) 
+        desc_button10 = Button(description='Oxygen value at which necrosis reaches its maximum rate' , tooltip='Oxygen value at which necrosis reaches its maximum rate', disabled=True, layout=desc_button_layout) 
         desc_button10.style.button_color = 'tan'
-        desc_button11 = Button(description='Tumor background apoptosis rate', disabled=True, layout=desc_button_layout) 
+        desc_button11 = Button(description='Tumor background apoptosis rate' , tooltip='Tumor background apoptosis rate', disabled=True, layout=desc_button_layout) 
         desc_button11.style.button_color = 'lightgreen'
-        desc_button12 = Button(description='Boolean variable that used to enable or disable cell motility', disabled=True, layout=desc_button_layout) 
+        desc_button12 = Button(description='Boolean variable that used to enable or disable cell motility' , tooltip='Boolean variable that used to enable or disable cell motility', disabled=True, layout=desc_button_layout) 
         desc_button12.style.button_color = 'tan'
-        desc_button13 = Button(description='Set the degree to which cell motility is biased along migration bias direction', disabled=True, layout=desc_button_layout) 
+        desc_button13 = Button(description='Set the degree to which cell motility is biased along migration bias direction' , tooltip='Set the degree to which cell motility is biased along migration bias direction', disabled=True, layout=desc_button_layout) 
         desc_button13.style.button_color = 'lightgreen'
-        desc_button14 = Button(description='The substrate index used for chemotaxis (0:NP1)', disabled=True, layout=desc_button_layout) 
+        desc_button14 = Button(description='The substrate index used for chemotaxis (0:NP1)' , tooltip='The substrate index used for chemotaxis (0:NP1)', disabled=True, layout=desc_button_layout) 
         desc_button14.style.button_color = 'tan'
-        desc_button15 = Button(description='Boolean variable that used to determine if go along grad(substrate[index])', disabled=True, layout=desc_button_layout) 
+        desc_button15 = Button(description='Boolean variable that used to determine if go along grad(substrate[index])' , tooltip='Boolean variable that used to determine if go along grad(substrate[index])', disabled=True, layout=desc_button_layout) 
         desc_button15.style.button_color = 'lightgreen'
-        desc_button16 = Button(description='Speed of motility', disabled=True, layout=desc_button_layout) 
+        desc_button16 = Button(description='Speed of motility' , tooltip='Speed of motility', disabled=True, layout=desc_button_layout) 
         desc_button16.style.button_color = 'tan'
-        desc_button17 = Button(description='Mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction', disabled=True, layout=desc_button_layout) 
+        desc_button17 = Button(description='Mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction' , tooltip='Mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction', disabled=True, layout=desc_button_layout) 
         desc_button17.style.button_color = 'lightgreen'
-        desc_button18 = Button(description='Maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)', disabled=True, layout=desc_button_layout) 
+        desc_button18 = Button(description='Maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)' , tooltip='Maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)', disabled=True, layout=desc_button_layout) 
         desc_button18.style.button_color = 'tan'
-        desc_button19 = Button(description='Strength used to change cell-cell adhesive forces', disabled=True, layout=desc_button_layout) 
+        desc_button19 = Button(description='Strength used to change cell-cell adhesive forces' , tooltip='Strength used to change cell-cell adhesive forces', disabled=True, layout=desc_button_layout) 
         desc_button19.style.button_color = 'lightgreen'
-        desc_button20 = Button(description='Strength used to change cell-cell repulsion forces', disabled=True, layout=desc_button_layout) 
+        desc_button20 = Button(description='Strength used to change cell-cell repulsion forces' , tooltip='Strength used to change cell-cell repulsion forces', disabled=True, layout=desc_button_layout) 
         desc_button20.style.button_color = 'tan'
-        desc_button21 = Button(description='Which treatment model used (0: Simple or 1: AUC)', disabled=True, layout=desc_button_layout) 
+        desc_button21 = Button(description='Which treatment model used (0: Simple or 1: AUC)' , tooltip='Which treatment model used (0: Simple or 1: AUC)', disabled=True, layout=desc_button_layout) 
         desc_button21.style.button_color = 'lightgreen'
-        desc_button22 = Button(description='Drug value that gives 50% of max effect', disabled=True, layout=desc_button_layout) 
+        desc_button22 = Button(description='Drug value that gives 50% of max effect' , tooltip='Drug value that gives 50% of max effect', disabled=True, layout=desc_button_layout) 
         desc_button22.style.button_color = 'tan'
-        desc_button23 = Button(description='Power used in the hill function for calculating drug effect', disabled=True, layout=desc_button_layout) 
+        desc_button23 = Button(description='Power used in the hill function for calculating drug effect' , tooltip='Power used in the hill function for calculating drug effect', disabled=True, layout=desc_button_layout) 
         desc_button23.style.button_color = 'lightgreen'
-        desc_button24 = Button(description='Boolean variable used to enable or disable active model for uptaking NPs', disabled=True, layout=desc_button_layout) 
+        desc_button24 = Button(description='Boolean variable used to enable or disable active model for uptaking NPs' , tooltip='Boolean variable used to enable or disable active model for uptaking NPs', disabled=True, layout=desc_button_layout) 
         desc_button24.style.button_color = 'tan'
-        desc_button25 = Button(description='Max ratio of internal concentration and reference external concentration for NPs', disabled=True, layout=desc_button_layout) 
+        desc_button25 = Button(description='Max ratio of internal concentration and reference external concentration for NPs' , tooltip='Max ratio of internal concentration and reference external concentration for NPs', disabled=True, layout=desc_button_layout) 
         desc_button25.style.button_color = 'lightgreen'
-        desc_button26 = Button(description='NPs internalization rate', disabled=True, layout=desc_button_layout) 
+        desc_button26 = Button(description='NPs internalization rate' , tooltip='NPs internalization rate', disabled=True, layout=desc_button_layout) 
         desc_button26.style.button_color = 'tan'
-        desc_button27 = Button(description='Reference external NPs concentration', disabled=True, layout=desc_button_layout) 
+        desc_button27 = Button(description='Reference external NPs concentration' , tooltip='Reference external NPs concentration', disabled=True, layout=desc_button_layout) 
         desc_button27.style.button_color = 'lightgreen'
-        desc_button28 = Button(description='Boolean variable for enable or disable cycle', disabled=True, layout=desc_button_layout) 
+        desc_button28 = Button(description='Boolean variable for enable or disable cycle' , tooltip='Boolean variable for enable or disable cycle', disabled=True, layout=desc_button_layout) 
         desc_button28.style.button_color = 'tan'
-        desc_button29 = Button(description='Boolean variable for enable or disable apoptosis', disabled=True, layout=desc_button_layout) 
+        desc_button29 = Button(description='Boolean variable for enable or disable apoptosis' , tooltip='Boolean variable for enable or disable apoptosis', disabled=True, layout=desc_button_layout) 
         desc_button29.style.button_color = 'lightgreen'
-        desc_button30 = Button(description='Boolean variable for enable or disable motility', disabled=True, layout=desc_button_layout) 
+        desc_button30 = Button(description='Boolean variable for enable or disable motility' , tooltip='Boolean variable for enable or disable motility', disabled=True, layout=desc_button_layout) 
         desc_button30.style.button_color = 'tan'
-        desc_button31 = Button(description='Boolean variable for enable or disable mechanics', disabled=True, layout=desc_button_layout) 
+        desc_button31 = Button(description='Boolean variable for enable or disable mechanics' , tooltip='Boolean variable for enable or disable mechanics', disabled=True, layout=desc_button_layout) 
         desc_button31.style.button_color = 'lightgreen'
-        desc_button32 = Button(description='Boolean variable for enable or disable secretion', disabled=True, layout=desc_button_layout) 
+        desc_button32 = Button(description='Boolean variable for enable or disable secretion' , tooltip='Boolean variable for enable or disable secretion', disabled=True, layout=desc_button_layout) 
         desc_button32.style.button_color = 'tan'
-        desc_button33 = Button(description='Max drug effect on maximum birth rate', disabled=True, layout=desc_button_layout) 
+        desc_button33 = Button(description='Max drug effect on maximum birth rate' , tooltip='Max drug effect on maximum birth rate', disabled=True, layout=desc_button_layout) 
         desc_button33.style.button_color = 'lightgreen'
-        desc_button34 = Button(description='Max drug effect on oxygen value above which the proliferation rate is maximized', disabled=True, layout=desc_button_layout) 
+        desc_button34 = Button(description='Max drug effect on oxygen value above which the proliferation rate is maximized' , tooltip='Max drug effect on oxygen value above which the proliferation rate is maximized', disabled=True, layout=desc_button_layout) 
         desc_button34.style.button_color = 'tan'
-        desc_button35 = Button(description='Max drug effect on oxygen value below which the proliferation ceases', disabled=True, layout=desc_button_layout) 
+        desc_button35 = Button(description='Max drug effect on oxygen value below which the proliferation ceases' , tooltip='Max drug effect on oxygen value below which the proliferation ceases', disabled=True, layout=desc_button_layout) 
         desc_button35.style.button_color = 'lightgreen'
-        desc_button36 = Button(description='Max drug effect on oxygen value that corresponds to the reference phenotype', disabled=True, layout=desc_button_layout) 
+        desc_button36 = Button(description='Max drug effect on oxygen value that corresponds to the reference phenotype' , tooltip='Max drug effect on oxygen value that corresponds to the reference phenotype', disabled=True, layout=desc_button_layout) 
         desc_button36.style.button_color = 'tan'
-        desc_button37 = Button(description='Max drug effect on maximum necrosis rate', disabled=True, layout=desc_button_layout) 
+        desc_button37 = Button(description='Max drug effect on maximum necrosis rate' , tooltip='Max drug effect on maximum necrosis rate', disabled=True, layout=desc_button_layout) 
         desc_button37.style.button_color = 'lightgreen'
-        desc_button38 = Button(description='Max drug effect on oxygen value at which necrosis starts', disabled=True, layout=desc_button_layout) 
+        desc_button38 = Button(description='Max drug effect on oxygen value at which necrosis starts' , tooltip='Max drug effect on oxygen value at which necrosis starts', disabled=True, layout=desc_button_layout) 
         desc_button38.style.button_color = 'tan'
-        desc_button39 = Button(description='Max drug effect on oxygen value at which necrosis reaches its maximum rate', disabled=True, layout=desc_button_layout) 
+        desc_button39 = Button(description='Max drug effect on oxygen value at which necrosis reaches its maximum rate' , tooltip='Max drug effect on oxygen value at which necrosis reaches its maximum rate', disabled=True, layout=desc_button_layout) 
         desc_button39.style.button_color = 'lightgreen'
-        desc_button40 = Button(description='Max drug effect on tumor apoptosis rate', disabled=True, layout=desc_button_layout) 
+        desc_button40 = Button(description='Max drug effect on tumor apoptosis rate' , tooltip='Max drug effect on tumor apoptosis rate', disabled=True, layout=desc_button_layout) 
         desc_button40.style.button_color = 'tan'
-        desc_button41 = Button(description='Max drug effect on boolean variable that used to enable or disable cell motility', disabled=True, layout=desc_button_layout) 
+        desc_button41 = Button(description='Max drug effect on boolean variable that used to enable or disable cell motility' , tooltip='Max drug effect on boolean variable that used to enable or disable cell motility', disabled=True, layout=desc_button_layout) 
         desc_button41.style.button_color = 'lightgreen'
-        desc_button42 = Button(description='Max drug effect on set the degree to which cell motility is biased along migration bias direction', disabled=True, layout=desc_button_layout) 
+        desc_button42 = Button(description='Max drug effect on set the degree to which cell motility is biased along migration bias direction' , tooltip='Max drug effect on set the degree to which cell motility is biased along migration bias direction', disabled=True, layout=desc_button_layout) 
         desc_button42.style.button_color = 'tan'
-        desc_button43 = Button(description='Max drug effect on the substrate index used for chemotaxis (0:NP1)', disabled=True, layout=desc_button_layout) 
+        desc_button43 = Button(description='Max drug effect on the substrate index used for chemotaxis (0:NP1)' , tooltip='Max drug effect on the substrate index used for chemotaxis (0:NP1)', disabled=True, layout=desc_button_layout) 
         desc_button43.style.button_color = 'lightgreen'
-        desc_button44 = Button(description='Max drug effect on boolean variable that used to determine if go along grad(substrate[index])', disabled=True, layout=desc_button_layout) 
+        desc_button44 = Button(description='Max drug effect on boolean variable that used to determine if go along grad(substrate[index])' , tooltip='Max drug effect on boolean variable that used to determine if go along grad(substrate[index])', disabled=True, layout=desc_button_layout) 
         desc_button44.style.button_color = 'tan'
-        desc_button45 = Button(description='Max drug effect on speed of motility', disabled=True, layout=desc_button_layout) 
+        desc_button45 = Button(description='Max drug effect on speed of motility' , tooltip='Max drug effect on speed of motility', disabled=True, layout=desc_button_layout) 
         desc_button45.style.button_color = 'lightgreen'
-        desc_button46 = Button(description='Max drug effect on mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction', disabled=True, layout=desc_button_layout) 
+        desc_button46 = Button(description='Max drug effect on mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction' , tooltip='Max drug effect on mean time cell continues at its current speed and direction before sampling the environment to choose a new motility direction', disabled=True, layout=desc_button_layout) 
         desc_button46.style.button_color = 'tan'
-        desc_button47 = Button(description='Max drug effect on maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)', disabled=True, layout=desc_button_layout) 
+        desc_button47 = Button(description='Max drug effect on maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)' , tooltip='Max drug effect on maximum distance of cell adhesion to other cells or a basement membrane (relative to cell radius)', disabled=True, layout=desc_button_layout) 
         desc_button47.style.button_color = 'lightgreen'
-        desc_button48 = Button(description='Max drug effect on strength used to change cell-cell adhesive forces', disabled=True, layout=desc_button_layout) 
+        desc_button48 = Button(description='Max drug effect on strength used to change cell-cell adhesive forces' , tooltip='Max drug effect on strength used to change cell-cell adhesive forces', disabled=True, layout=desc_button_layout) 
         desc_button48.style.button_color = 'tan'
-        desc_button49 = Button(description='Max drug effect on strength used to change cell-cell repulsion forces', disabled=True, layout=desc_button_layout) 
+        desc_button49 = Button(description='Max drug effect on strength used to change cell-cell repulsion forces' , tooltip='Max drug effect on strength used to change cell-cell repulsion forces', disabled=True, layout=desc_button_layout) 
         desc_button49.style.button_color = 'lightgreen'
-        desc_button50 = Button(description='Max drug effect on uptake rate of oxygen', disabled=True, layout=desc_button_layout) 
+        desc_button50 = Button(description='Max drug effect on uptake rate of oxygen' , tooltip='Max drug effect on uptake rate of oxygen', disabled=True, layout=desc_button_layout) 
         desc_button50.style.button_color = 'tan'
 
         row1 = [param_name1, self.random_seed, units_button1, desc_button1] 
