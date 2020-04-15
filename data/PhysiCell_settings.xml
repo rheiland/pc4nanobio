@@ -166,8 +166,9 @@
 		
 		<tumor_radius type="double" units="micron" description="Initial tumor radius">250</tumor_radius>
 		
-		
+	
 		<!-- untreated cell parameters !!!!!!!!!!! --> 
+<div_background type="divider" description="---Background phenotype (without drug effect)---"/>
 		
 		<oxygen_uptake_rate type="double" units="1/min" description="Uptake rate of oxygen">10</oxygen_uptake_rate>
 		<oxygen_secretion_rate type="double" units="1/min" hidden="true">0</oxygen_secretion_rate>
@@ -211,6 +212,7 @@
 		
 
         <!-- Add nanoparticles parameters here !!!!!!!!!!! --> 
+<div_modelpara type="divider" description="---Model parameters---"/>
 
 		<effect_model type="int" units="none" description="Which treatment model used (0: Simple or 1: AUC)">0</effect_model>
 			<!-- 0: simple (conc), 1: intermediate (AUC), 2: details (activation and deactivation) -->
@@ -235,6 +237,7 @@
 
 
 		<!-- cell response with the NPs or drug !!!!!!!!!!!!!!!!!!!!!!!-->
+<div_response type="divider" description="---Maximum drug-induced phenotypic response---"/>
 		
 		<!-- cycle -->
 		<treat_max_birth_rate type="double" units="1/min" description="Max drug effect on maximum birth rate">0.00018</treat_max_birth_rate> <!-- 0.00072 -->
